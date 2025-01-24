@@ -16980,8 +16980,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09c4b7176440ffc4898bc92a54578763, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  oxygen: 100
   force: 1000
   maxSpeed: 2
+  dashTime: 0.33
+  dashForce: 4000
+  dashMaxSpeed: 9
 --- !u!54 &1439209338
 Rigidbody:
   m_ObjectHideFlags: 0
