@@ -60,6 +60,8 @@ public class Player : MonoBehaviour
     float hueAnimValue;
     MaterialPropertyBlock propertyBlock;
     List<MeshRenderer> oxygenLightRenderers = new List<MeshRenderer>();
+    ChromaticAberration chromaticAberration;
+    ScreenSpaceLensFlare screenSpaceLensFlare;
 
     void Start()
     {
@@ -71,6 +73,8 @@ public class Player : MonoBehaviour
         defaultHeadlightIntensity = headLight.intensity;
         postProcessVolume.profile.TryGet(out vignette);
         postProcessVolume.profile.TryGet(out colorAdjustments);
+        postProcessVolume.profile.TryGet(out chromaticAberration);
+        postProcessVolume.profile.TryGet(out screenSpaceLensFlare);
         propertyBlock = new MaterialPropertyBlock();
         for (int i = 0; i < oxygenLights.Length; ++i)
         {
@@ -108,6 +112,8 @@ public class Player : MonoBehaviour
         float oxyValue = oxygen / 100.0f;
         vignette.intensity.value = Mathf.Lerp(0.60f, 0.25f, oxyValue);
         vignette.color.value = vignetteGradient.Evaluate(oxyValue);
+        chromaticAberration.intensity.value = Mathf.Lerp(1.0f, 0.1f, oxyValue);
+        //screenSpaceLensFlare.intensity.value = Mathf.Lerp(100.0f, 0.0f, oxyValue);
 
         float depthValue = Mathf.Abs(transform.position.y) / 100.0f;
         colorAdjustments.postExposure.value = Mathf.Lerp(1.0f, -0.66f, depthValue);
