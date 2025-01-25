@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     public float dashTime = 0.33f;
     public float dashForce = 4000.0f;
     public float dashMaxSpeed = 9.0f;
+    public float dashOxygenConsumption = 10.0f;
     public float hurtTime = 0.5f;
     public float hurtForce = 1.0f;
     public GameObject[] oxygenLights;
@@ -52,9 +53,9 @@ public class Player : MonoBehaviour
         if(isDead)
             return;
 
-        if (dashAction.triggered && !isDashing)
+        if (dashAction.triggered && !isDashing && oxygen > dashOxygenConsumption * 1.1f)
         {
-            oxygen -= 10.0f;
+            oxygen -= dashOxygenConsumption;
             dashTimer = Time.time + dashTime;
         }
         isDashing = dashTimer > Time.time;
