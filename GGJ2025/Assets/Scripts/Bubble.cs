@@ -28,8 +28,6 @@ public class Bubble : MonoBehaviour
         }
         rb.AddForce(dir * force, ForceMode.Force);
 
-        Debug.Log(dir);
-
         if (rb.linearVelocity.magnitude > maxSpeed)
         {
             rb.linearVelocity = rb.linearVelocity.normalized * maxSpeed;
