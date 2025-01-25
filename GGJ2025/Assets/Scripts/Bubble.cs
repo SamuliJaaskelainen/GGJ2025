@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Bubble : MonoBehaviour
 {
+    public MeshRenderer meshRenderer;
     public float health = 100.0f;
     public Rigidbody rb;
     public float force = 1.0f;
@@ -22,7 +23,9 @@ public class Bubble : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(Time.time > hitTimer)
+        rb.isKinematic = !meshRenderer.isVisible;
+
+        if (Time.time > hitTimer)
         {
             dir = new Vector3(wave * Mathf.Sin(Time.time + random), 1.0f, 0.0f);
         }
@@ -41,6 +44,13 @@ public class Bubble : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+        if (collision.transform.tag == "Player")
+        {
+            collision.transform.GetComponent<Player>().oxygen = 100.0f;
+            Pop();
+            return;
+        }
+
         health -= 30.0f;
         hitTimer = Time.time + hitDelay;
         dir = -dir;
@@ -49,11 +59,6 @@ public class Bubble : MonoBehaviour
         if (health < 0.0f)
         {
             Pop();
-        }
-
-        if(collision.transform.tag == "Player")
-        {
-            collision.transform.GetComponent<Player>().oxygen = 100.0f;
         }
     }
 
