@@ -30,16 +30,19 @@ public class LevelGenerator : MonoBehaviour
 
     void Start()
     {
-        for(int i = 0; i < spawnCount; ++i)
-        {
-            SpawnNextPiece();
+        if(spawnCount <= extraPiecesCount)
+        { 
+            Debug.LogError("Spawn count must be greater then extra pieces count!");
         }
+
+        SpawnNextSection();
     }
 
     void Update()
     {
         if (player.position.y < spawnedPieces[spawnedPieces.Count - 1].transform.position.y)
         {
+            //Destroy and clear extra pieces if any
             if(extraPieces.Count > 0)
             {
                 for (int i = 0; i < extraPieces.Count; ++i)
@@ -49,22 +52,23 @@ public class LevelGenerator : MonoBehaviour
             }
             extraPieces.Clear();
 
+            // Destroy spawned pieces, save some extras for the transition area
             for (int i = 0; i < spawnCount - extraPiecesCount; ++i)
             {
                 Destroy(spawnedPieces[i]);
             }
 
+            // Save extras to a list
             for (int i = spawnCount - extraPiecesCount; i < spawnCount; ++i)
             {
                 extraPieces.Add(spawnedPieces[i]);
             }
 
+            // Clear all spawned pieces
             spawnedPieces.Clear();
 
-            for (int i = 0; i < spawnCount; ++i)
-            {
-                SpawnNextPiece();
-            }
+            // Spawn new section
+            SpawnNextSection();
         }
     }
 
@@ -73,5 +77,13 @@ public class LevelGenerator : MonoBehaviour
         LevelPiece nextPiece = biomes[currentBiome].pieces[Random.Range(0, biomes[currentBiome].pieces.Length)];
         spawnedPieces.Add(Instantiate(nextPiece.prefab, new Vector3(0.0f, nextPieceSpawnY, 0.0f), Quaternion.identity));
         nextPieceSpawnY -= nextPiece.height;
+    }
+
+    void SpawnNextSection()
+    {
+        for (int i = 0; i < spawnCount; ++i)
+        {
+            SpawnNextPiece();
+        }
     }
 }

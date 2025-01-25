@@ -28,6 +28,8 @@ public class Player : MonoBehaviour
     public Color warningHeadlightColor;
     public AnimationCurve warningHeadlightAnim;
     public float warningHeadlightSpeed;
+    public Transform bgDiv;
+    public float bgDivDistance = 0.72f;
 
     InputAction moveAction;
     InputAction dashAction;
@@ -139,6 +141,9 @@ public class Player : MonoBehaviour
         {
             oxygenLights[i].SetActive(oxygen >= (100.0f / oxygenLights.Length * i));
         }
+
+        bgDiv.localPosition = new Vector3(0.0f, 0.0f, bgDivDistance);
+        bgDiv.eulerAngles = new Vector3(270.0f, 0.0f, 0.0f);
     }
 
     void FixedUpdate()

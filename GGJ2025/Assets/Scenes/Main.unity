@@ -654,8 +654,8 @@ MonoBehaviour:
     - prefab: {fileID: 73100307721189330, guid: b7376d39c319b7242a774e1a9aa6c5ee, type: 3}
       height: 10
   currentBiome: 0
-  spawnCount: 4
-  extraPiecesCount: 10
+  spawnCount: 10
+  extraPiecesCount: 4
 --- !u!4 &499356311
 Transform:
   m_ObjectHideFlags: 0
@@ -961,7 +961,7 @@ MonoBehaviour:
   force: 1000
   maxSpeed: 2
   turnSpeed: 133
-  dashTime: 1
+  dashTime: 1.3
   dashForce: 3333
   dashMaxSpeed: 5
   dashOxygenConsumption: 10
@@ -1018,6 +1018,8 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   warningHeadlightSpeed: 6
+  bgDiv: {fileID: 1867876625}
+  bgDivDistance: 0.72
 --- !u!54 &1439209338
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1229,7 +1231,7 @@ GameObject:
   - component: {fileID: 1867876628}
   - component: {fileID: 1867876627}
   m_Layer: 0
-  m_Name: GBDiv
+  m_Name: BGDiv
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1243,13 +1245,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1867876624}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.70710677, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.70791, y: -0.73, z: 0.72}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: -0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0.72}
   m_LocalScale: {x: 2.591, y: 2.591, z: 2.591}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1439209336}
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 270, y: 0, z: 0}
 --- !u!23 &1867876627
 MeshRenderer:
   m_ObjectHideFlags: 0
