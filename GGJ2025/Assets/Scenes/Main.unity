@@ -648,11 +648,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f958f6d9cbd89143b295df7d3d25991, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1439209336}
   biomes:
   - pieces:
     - prefab: {fileID: 73100307721189330, guid: b7376d39c319b7242a774e1a9aa6c5ee, type: 3}
       height: 10
   currentBiome: 0
+  spawnCount: 4
+  extraPiecesCount: 10
 --- !u!4 &499356311
 Transform:
   m_ObjectHideFlags: 0
