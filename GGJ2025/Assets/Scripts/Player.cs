@@ -1,14 +1,19 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
+    public static int highScore;
+
     public Transform sceneCamera;
     public float cameraDistance = 10.0f;
     public float maxCameraPredictionMultiplier = 1.0f;
     public float maxCameraPrediction = 1.0f;
     public float cameraSmoothness = 10.0f;
     public float currentScore;
+    public TextMeshPro highScoreText;
     public Transform head;
     public bool isDead;
     public Animator anim;
@@ -47,6 +52,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        highScoreText.text = "HIGH SCORE " + Mathf.Abs(highScore) + "m";
         moveAction = InputSystem.actions.FindAction("Move");
         dashAction = InputSystem.actions.FindAction("Dash");
         rb = GetComponent<Rigidbody>();
@@ -56,7 +62,17 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if(isDead)
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(0);
+        }
+
+        if (isDead)
             return;
 
         moveInput = moveAction.ReadValue<Vector2>();
@@ -107,6 +123,11 @@ public class Player : MonoBehaviour
 
         if(oxygen < 0.0f)
         {
+            if(currentScore < highScore)
+            {
+                highScore = Mathf.RoundToInt(currentScore);
+            }
+
             isDead =  true;
             anim.SetBool("IsDead", true);
         }
