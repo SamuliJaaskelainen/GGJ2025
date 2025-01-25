@@ -9,12 +9,14 @@ public class Player : MonoBehaviour
     public float maxCameraPrediction = 1.0f;
     public float cameraSmoothness = 10.0f;
     public float currentScore;
+    public Transform head;
     public bool isDead;
     public Animator anim;
     public float oxygen = 100.0f;
     public float automaticOxuygenLoss = 1.0f;
     public float force = 1000.0f;
     public float maxSpeed = 2.0f;
+    public float turnSpeed = 100.0f;
     public float dashTime = 0.33f;
     public float dashForce = 4000.0f;
     public float dashMaxSpeed = 9.0f;
@@ -39,6 +41,7 @@ public class Player : MonoBehaviour
     Color defaultHeadlightColor;
     float defaultHeadlightIntensity;
     float warningAnimTime;
+    Vector2 moveInput;
 
     void Start()
     {
@@ -53,6 +56,8 @@ public class Player : MonoBehaviour
     {
         if(isDead)
             return;
+
+        moveInput = moveAction.ReadValue<Vector2>();
 
         if (dashAction.triggered && !isDashing && oxygen > dashOxygenConsumption * 1.1f)
         {
@@ -79,9 +84,23 @@ public class Player : MonoBehaviour
             headLight.intensity = defaultHeadlightIntensity;
         }
 
-        moveDir = moveAction.ReadValue<Vector2>() * Time.deltaTime * (isDashing ? dashForce : force);
-        oxygen -= moveAction.ReadValue<Vector2>().magnitude * Time.deltaTime;
-
+        if(isDashing && Mathf.Abs(moveInput.y) < 0.3f)
+        {
+            moveDir = transform.up * Time.deltaTime * (isDashing ? dashForce : force);
+        }
+        else
+        {
+            if(Mathf.Abs(moveInput.x) > Mathf.Abs(moveInput.y))
+            {
+                moveDir = (transform.up * 0.5f) * Time.deltaTime * (isDashing ? dashForce : force);
+            }
+            else
+            {
+                moveDir = (transform.up * -moveInput.y) * Time.deltaTime * (isDashing ? dashForce : force);
+            }
+        }
+        
+        oxygen -= moveInput.magnitude * Time.deltaTime;
         oxygen -= automaticOxuygenLoss * Time.deltaTime;
 
         if(oxygen < 0.0f)
@@ -90,7 +109,28 @@ public class Player : MonoBehaviour
             anim.SetBool("IsDead", true);
         }
 
-        if(transform.position.y < currentScore)
+        if (moveInput.y > 0.3f)
+        {
+            anim.SetFloat("Swim", -moveAction.ReadValue<Vector2>().magnitude);
+        }
+        else if (moveInput.y < -0.3f)
+        {
+            anim.SetFloat("Swim", moveAction.ReadValue<Vector2>().magnitude);
+        }
+        else if (moveInput.x > 0.3f)
+        {
+            anim.SetFloat("Swim", moveAction.ReadValue<Vector2>().magnitude);
+        }
+        else if (moveInput.x < -0.3f)
+        {
+            anim.SetFloat("Swim", moveAction.ReadValue<Vector2>().magnitude);
+        }
+        else
+        {
+            anim.SetFloat("Swim", 0.0f);
+        }
+
+        if (transform.position.y < currentScore)
         {
             currentScore = transform.position.y;
         }
@@ -119,6 +159,19 @@ public class Player : MonoBehaviour
         {
             rb.linearVelocity = rb.linearVelocity.normalized * currentMaxSpeed;
         }
+
+        Quaternion turn = Quaternion.identity;
+        if(moveInput.x > 0.3f)
+        {
+            turn = Quaternion.Euler(new Vector3(0.0f, 0.0f, turnSpeed * Time.fixedDeltaTime * (isDashing ? 0.33f : 1.0f)));
+        }
+        else if(moveInput.x < -0.3f)
+        {
+            turn = Quaternion.Euler(new Vector3(0.0f, 0.0f, -turnSpeed * Time.fixedDeltaTime * (isDashing ? 0.33f : 1.0f)));
+            
+        }
+
+        rb.MoveRotation(rb.rotation * turn);
     }
 
     void LateUpdate()
