@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     public float cameraSmoothness = 10.0f;
     public float currentScore;
     public bool isDead;
+    public Animator anim;
     public float oxygen = 100.0f;
     public float automaticOxuygenLoss = 1.0f;
     public float force = 1000.0f;
@@ -57,6 +58,7 @@ public class Player : MonoBehaviour
         {
             oxygen -= dashOxygenConsumption;
             dashTimer = Time.time + dashTime;
+            anim.SetTrigger("Dash");
         }
         isDashing = dashTimer > Time.time;
 
@@ -85,6 +87,7 @@ public class Player : MonoBehaviour
         if(oxygen < 0.0f)
         {
             isDead =  true;
+            anim.SetBool("IsDead", true);
         }
 
         if(transform.position.y < currentScore)
@@ -134,6 +137,7 @@ public class Player : MonoBehaviour
             hurtTimer = Time.time + hurtTime;
             hurtDir = (collision.GetContact(0).point - collision.transform.position).normalized;
             Debug.DrawLine(collision.GetContact(0).point, collision.GetContact(0).point + hurtDir, Color.white, 10.0f);
+            anim.SetTrigger("Hurt");
         }
     }
 }

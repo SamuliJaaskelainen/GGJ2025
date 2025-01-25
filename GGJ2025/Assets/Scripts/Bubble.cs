@@ -46,7 +46,9 @@ public class Bubble : MonoBehaviour
     {
         if (collision.transform.tag == "Player")
         {
-            collision.transform.GetComponent<Player>().oxygen = 100.0f;
+            Player player = collision.transform.GetComponent<Player>();
+            player.oxygen = 100.0f;
+            player.anim.SetTrigger("Bubble");
             Pop();
             return;
         }
