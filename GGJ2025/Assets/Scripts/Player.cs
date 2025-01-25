@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using System.Collections.Generic;
 
 public class Player : MonoBehaviour
 {
@@ -31,6 +32,7 @@ public class Player : MonoBehaviour
     public float hurtTime = 0.5f;
     public float hurtForce = 1.0f;
     public GameObject[] oxygenLights;
+    public Gradient oxygenLightGradient;
     public Light headLight;
     public Color warningHeadlightColor;
     public AnimationCurve warningHeadlightAnim;
@@ -56,6 +58,8 @@ public class Player : MonoBehaviour
     Vignette vignette;
     ColorAdjustments colorAdjustments;
     float hueAnimValue;
+    MaterialPropertyBlock propertyBlock;
+    List<MeshRenderer> oxygenLightRenderers = new List<MeshRenderer>();
 
     void Start()
     {
@@ -67,6 +71,11 @@ public class Player : MonoBehaviour
         defaultHeadlightIntensity = headLight.intensity;
         postProcessVolume.profile.TryGet(out vignette);
         postProcessVolume.profile.TryGet(out colorAdjustments);
+        propertyBlock = new MaterialPropertyBlock();
+        for (int i = 0; i < oxygenLights.Length; ++i)
+        {
+            oxygenLightRenderers.Add(oxygenLights[i].GetComponent<MeshRenderer>());
+        }
     }
 
     void Update()
@@ -84,6 +93,13 @@ public class Player : MonoBehaviour
         for (int i = 0; i < oxygenLights.Length; ++i)
         {
             oxygenLights[i].SetActive(oxygen >= (100.0f / oxygenLights.Length * i));
+
+            if(oxygenLights[i].activeSelf)
+            {
+                float oxyGraValue = 1.0f - (oxygen - i * 20.0f) / 20.0f;
+                propertyBlock.SetColor("_EmissionColor", oxygenLightGradient.Evaluate(oxyGraValue));
+                oxygenLightRenderers[i].SetPropertyBlock(propertyBlock);
+            }
         }
 
         bgDiv.localPosition = new Vector3(0.0f, 0.0f, bgDivDistance);
@@ -94,7 +110,6 @@ public class Player : MonoBehaviour
         vignette.color.value = vignetteGradient.Evaluate(oxyValue);
 
         float depthValue = Mathf.Abs(transform.position.y) / 100.0f;
-        Debug.Log(depthValue);
         colorAdjustments.postExposure.value = Mathf.Lerp(1.0f, -0.66f, depthValue);
         colorAdjustments.contrast.value = Mathf.Lerp(0.0f, 100.0f, depthValue);
         colorAdjustments.saturation.value = Mathf.Lerp(0.0f, -90.0f, depthValue);
