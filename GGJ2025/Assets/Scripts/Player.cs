@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     public float dashTime = 0.33f;
     public float dashForce = 4000.0f;
     public float dashMaxSpeed = 9.0f;
+    public GameObject[] oxygenLights;
 
     InputAction moveAction;
     InputAction dashAction;
@@ -34,7 +35,6 @@ public class Player : MonoBehaviour
 
         if (dashAction.triggered && !isDashing)
         {
-            Debug.Log("Dash!");
             oxygen -= 10.0f;
             dashTimer = Time.time + dashTime;
         }
@@ -53,6 +53,11 @@ public class Player : MonoBehaviour
         if(transform.position.y < currentScore)
         {
             currentScore = transform.position.y;
+        }
+
+        for(int i = 0; i < oxygenLights.Length; ++i)
+        {
+            oxygenLights[i].SetActive(oxygen >= (100.0f / oxygenLights.Length * i));
         }
     }
 
