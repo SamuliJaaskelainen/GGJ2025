@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class Player : MonoBehaviour
 {
@@ -35,6 +37,8 @@ public class Player : MonoBehaviour
     public float warningHeadlightSpeed;
     public Transform bgDiv;
     public float bgDivDistance = 0.72f;
+    public Volume postProcessVolume;
+    public Gradient vignetteGradient;
 
     InputAction moveAction;
     InputAction dashAction;
@@ -49,6 +53,9 @@ public class Player : MonoBehaviour
     float defaultHeadlightIntensity;
     float warningAnimTime;
     Vector2 moveInput;
+    Vignette vignette;
+    ColorAdjustments colorAdjustments;
+    float hueAnimValue;
 
     void Start()
     {
@@ -58,6 +65,8 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         defaultHeadlightColor = headLight.color;
         defaultHeadlightIntensity = headLight.intensity;
+        postProcessVolume.profile.TryGet(out vignette);
+        postProcessVolume.profile.TryGet(out colorAdjustments);
     }
 
     void Update()
@@ -71,6 +80,26 @@ public class Player : MonoBehaviour
         {
             SceneManager.LoadScene(0);
         }
+
+        for (int i = 0; i < oxygenLights.Length; ++i)
+        {
+            oxygenLights[i].SetActive(oxygen >= (100.0f / oxygenLights.Length * i));
+        }
+
+        bgDiv.localPosition = new Vector3(0.0f, 0.0f, bgDivDistance);
+        bgDiv.eulerAngles = new Vector3(270.0f, 0.0f, 0.0f);
+
+        float oxyValue = oxygen / 100.0f;
+        vignette.intensity.value = Mathf.Lerp(0.60f, 0.25f, oxyValue);
+        vignette.color.value = vignetteGradient.Evaluate(oxyValue);
+
+        float depthValue = Mathf.Abs(transform.position.y) / 100.0f;
+        Debug.Log(depthValue);
+        colorAdjustments.postExposure.value = Mathf.Lerp(1.0f, -0.66f, depthValue);
+        colorAdjustments.contrast.value = Mathf.Lerp(0.0f, 100.0f, depthValue);
+        colorAdjustments.saturation.value = Mathf.Lerp(0.0f, -90.0f, depthValue);
+        colorAdjustments.hueShift.value = Mathf.Sin(hueAnimValue) * 10.0f;
+        hueAnimValue += Time.deltaTime * 0.01f;
 
         if (isDead)
             return;
@@ -157,14 +186,6 @@ public class Player : MonoBehaviour
         {
             currentScore = transform.position.y;
         }
-
-        for(int i = 0; i < oxygenLights.Length; ++i)
-        {
-            oxygenLights[i].SetActive(oxygen >= (100.0f / oxygenLights.Length * i));
-        }
-
-        bgDiv.localPosition = new Vector3(0.0f, 0.0f, bgDivDistance);
-        bgDiv.eulerAngles = new Vector3(270.0f, 0.0f, 0.0f);
     }
 
     void FixedUpdate()

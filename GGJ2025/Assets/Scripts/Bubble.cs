@@ -56,7 +56,10 @@ public class Bubble : MonoBehaviour
         health -= 30.0f;
         hitTimer = Time.time + hitDelay;
         dir = -dir;
-        rb.linearVelocity = Vector3.zero;
+        if(!rb.isKinematic)
+        { 
+            rb.linearVelocity = Vector3.zero;
+        }
 
         if (health < 0.0f)
         {
