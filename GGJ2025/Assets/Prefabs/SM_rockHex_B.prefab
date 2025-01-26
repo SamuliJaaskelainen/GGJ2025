@@ -51,14 +51,14 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 21f52e235edd46341a358cef2845f94f, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 7d592ca282c756d41906a207bcaf8dd8, type: 2}
+      objectReference: {fileID: 2100000, guid: 205e6495480e48a4fa5a0cbad40edfbd, type: 2}
     - target: {fileID: 919132149155446097, guid: 21f52e235edd46341a358cef2845f94f, type: 3}
       propertyPath: m_Name
       value: SM_rockHex_B
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 21f52e235edd46341a358cef2845f94f, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 2147483647
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -70,6 +70,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 21f52e235edd46341a358cef2845f94f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3811141190331427559}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 21f52e235edd46341a358cef2845f94f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4842607883925311080}
   m_SourcePrefab: {fileID: 100100000, guid: 21f52e235edd46341a358cef2845f94f, type: 3}
 --- !u!1 &2453172393477653350 stripped
 GameObject:
@@ -111,3 +114,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localAxis: {x: 0, y: 1, z: 0}
+--- !u!114 &4842607883925311080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2453172393477653350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cf5dc9407b249b498501d08b0fcb245, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localAxis: {x: 1, y: 0, z: 0}
+  min: -5
+  max: 5

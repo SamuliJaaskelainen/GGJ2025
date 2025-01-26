@@ -136,7 +136,7 @@ public class Player : MonoBehaviour
         float depthValue = Mathf.Abs(transform.position.y) / postProcessMaxDepth;
         colorAdjustments.postExposure.value = Mathf.Lerp(1.0f, -0.66f, depthValue);
         colorAdjustments.contrast.value = Mathf.Lerp(0.0f, 100.0f, depthValue);
-        colorAdjustments.saturation.value = Mathf.Lerp(0.0f, -90.0f, depthValue);
+        colorAdjustments.saturation.value = Mathf.Lerp(0.0f, -50.0f, depthValue);
         colorAdjustments.hueShift.value = Mathf.Sin(hueAnimValue) * 10.0f;
         hueAnimValue += Time.deltaTime * 0.01f;
         
