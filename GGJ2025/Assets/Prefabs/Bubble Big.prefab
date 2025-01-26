@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 586181937882847462}
   - component: {fileID: 7485489869666395683}
   m_Layer: 0
-  m_Name: Bubble
+  m_Name: Bubble Big
   m_TagString: Oxygen
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,6 +74,7 @@ MonoBehaviour:
   force: 0.14
   wave: 0.3
   maxSpeed: 0.5
+  oxygen: 60
 --- !u!54 &7485489869666395683
 Rigidbody:
   m_ObjectHideFlags: 0

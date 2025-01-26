@@ -8,6 +8,7 @@ public class Bubble : MonoBehaviour
     public float force = 1.0f;
     public float wave = 1.0f;
     public float maxSpeed = 2.0f;
+    public float oxygen = 100.0f;
     Vector3 scaleTarget;
 
     float hitTimer;
@@ -60,7 +61,8 @@ public class Bubble : MonoBehaviour
         {
             // TODO: Play more oxygen audio
             Player player = collision.transform.GetComponent<Player>();
-            player.oxygen = 100.0f;
+            player.oxygen += oxygen;
+            player.oxygen = Mathf.Min(player.oxygen, 100.0f);
             player.anim.SetTrigger("Bubble");
             Pop();
             return;
