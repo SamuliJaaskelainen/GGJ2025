@@ -41,6 +41,8 @@ public class Player : MonoBehaviour
     public float bgDivDistance = 0.72f;
     public Volume postProcessVolume;
     public Gradient vignetteGradient;
+    public AudioSource music;
+    public AudioClip[] tracks;
 
     InputAction moveAction;
     InputAction dashAction;
@@ -79,6 +81,21 @@ public class Player : MonoBehaviour
         for (int i = 0; i < oxygenLights.Length; ++i)
         {
             oxygenLightRenderers.Add(oxygenLights[i].GetComponent<MeshRenderer>());
+        }
+    }
+
+    void ChangeMusicTrack(int index, bool keepTime = true)
+    {
+        if(music.clip != tracks[index])
+        { 
+            float t = music.time;
+            music.clip = tracks[index];
+            music.Play();
+            if(keepTime)
+            { 
+                music.time = t;
+            }
+            Debug.Log("Change to music track " + index);
         }
     }
 
@@ -121,6 +138,24 @@ public class Player : MonoBehaviour
         colorAdjustments.saturation.value = Mathf.Lerp(0.0f, -90.0f, depthValue);
         colorAdjustments.hueShift.value = Mathf.Sin(hueAnimValue) * 10.0f;
         hueAnimValue += Time.deltaTime * 0.01f;
+        
+        if(isDead)
+        {
+            music.loop = false;
+            ChangeMusicTrack(3, false);
+        }
+        else if(oxygen > 80.0f)
+        {
+            ChangeMusicTrack(0);
+        }
+        else if(oxygen > 40.0f)
+        {
+            ChangeMusicTrack(1);
+        }
+        else
+        {
+            ChangeMusicTrack(2);
+        }
 
         if (isDead)
             return;
@@ -149,7 +184,15 @@ public class Player : MonoBehaviour
         }
         else
         {
-            headLight.color = defaultHeadlightColor;
+            var animatorinfo = anim.GetCurrentAnimatorClipInfo(0);
+            if(animatorinfo[0].clip.name == "Diver@Bubble")
+            {
+                headLight.color = Color.cyan;
+            }
+            else
+            {
+                headLight.color = defaultHeadlightColor;
+            }
             headLight.intensity = defaultHeadlightIntensity;
         }
 
