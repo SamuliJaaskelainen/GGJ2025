@@ -7,6 +7,7 @@ public class Fish : MonoBehaviour
     public Transform path;
     public float speed = 1.0f;
     public float wave = 1.0f;
+    public AudioClip audioClip;
 
     List<Vector3> pathNodes = new List<Vector3>();
     int targetNode = 0;
@@ -39,7 +40,10 @@ public class Fish : MonoBehaviour
         {
             if (!playedSound)
             {
-                AudioManager.Instance.PlaySound("monster_octopus");
+                if(audioClip)
+                { 
+                    AudioManager.Instance.PlaySound(audioClip, 0.3f, Random.Range(0.9f, 1.1f));
+                }
                 playedSound = true;
             }
 

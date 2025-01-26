@@ -50,6 +50,7 @@ MonoBehaviour:
   path: {fileID: 0}
   speed: 1
   wave: 1
+  audioClip: {fileID: 8300000, guid: 3e40d1c407da59941ae17ecf7fc150e7, type: 3}
 --- !u!1 &6404082955478071117
 GameObject:
   m_ObjectHideFlags: 0

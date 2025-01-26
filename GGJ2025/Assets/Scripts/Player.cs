@@ -167,7 +167,7 @@ public class Player : MonoBehaviour
             oxygen -= dashOxygenConsumption;
             dashTimer = Time.time + dashTime;
             anim.SetTrigger("Dash");
-            AudioManager.Instance.PlaySound("dash");
+            AudioManager.Instance.PlaySound("dash", 1.0f, Random.Range(0.95f, 1.0f));
         }
         isDashing = dashTimer > Time.time;
 

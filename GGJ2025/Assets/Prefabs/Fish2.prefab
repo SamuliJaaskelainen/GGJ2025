@@ -586,6 +586,7 @@ MonoBehaviour:
   path: {fileID: 0}
   speed: 1
   wave: 1
+  audioClip: {fileID: 8300000, guid: f14721c97123a194785c4161730791ac, type: 3}
 --- !u!136 &90582381842089103
 CapsuleCollider:
   m_ObjectHideFlags: 0
