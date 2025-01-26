@@ -5712,7 +5712,7 @@ MonoBehaviour:
   warningHeadlightSpeed: 6
   bgDiv: {fileID: 1867876625}
   bgDivDistance: 0.72
-  postProcessMaxDepth: 10
+  postProcessMaxDepth: 400
   postProcessVolume: {fileID: 832575518}
   vignetteGradient:
     serializedVersion: 2
