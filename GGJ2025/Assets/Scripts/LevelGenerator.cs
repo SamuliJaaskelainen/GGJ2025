@@ -80,11 +80,14 @@ public class LevelGenerator : MonoBehaviour
         nextPieceSpawnY -= nextPiece.height;
         biomeProgress++;
 
-        if(biomeProgress > biomes[currentBiome].biomeLenght)
+        if(biomeProgress >= biomes[currentBiome].biomeLenght)
         {
-            Debug.Log("Next biome");
             biomeProgress = 0;
-            currentBiome = Mathf.Min(currentBiome++, biomes.Count - 1);
+            if(currentBiome < biomes.Count -1)
+            {
+                currentBiome++;
+            }
+            Debug.Log("Next biome " + currentBiome);
         }
     }
 
