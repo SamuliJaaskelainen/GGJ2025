@@ -2240,6 +2240,7 @@ MonoBehaviour:
   - pieces:
     - prefab: {fileID: 73100307721189330, guid: b7376d39c319b7242a774e1a9aa6c5ee, type: 3}
       height: 10
+    biomeLenght: 99999
   currentBiome: 0
   spawnCount: 10
   extraPiecesCount: 4
