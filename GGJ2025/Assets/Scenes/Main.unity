@@ -632,7 +632,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae59ddb7e303948459d61a9486933aa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundEffects: []
+  soundEffects:
+  - {fileID: 8300000, guid: 167540bdb11806748861af7e85adbf73, type: 3}
+  - {fileID: 8300000, guid: fffb144e8af4060448db6bb0661deba0, type: 3}
+  - {fileID: 8300000, guid: 181aefc7fa056b742847a939aca29847, type: 3}
+  - {fileID: 8300000, guid: 43e8eabc46483d54db36f005c44132ae, type: 3}
+  - {fileID: 8300000, guid: 7c080f8b5635e4e4f85244113560514c, type: 3}
+  - {fileID: 8300000, guid: f14721c97123a194785c4161730791ac, type: 3}
+  - {fileID: 8300000, guid: 2249feae11947ba488feea94e6f53308, type: 3}
+  - {fileID: 8300000, guid: 3e40d1c407da59941ae17ecf7fc150e7, type: 3}
   audioPrefab: {fileID: 878244700324228157, guid: 1e91035dbd77525468468df10999abd7, type: 3}
 --- !u!4 &108415767
 Transform:
@@ -6885,7 +6893,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 1
   Mute: 0

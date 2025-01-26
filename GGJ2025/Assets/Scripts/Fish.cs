@@ -39,7 +39,7 @@ public class Fish : MonoBehaviour
         {
             if (!playedSound)
             {
-                // TODO: Play appear sound
+                AudioManager.Instance.PlaySound("monster_octopus");
                 playedSound = true;
             }
 

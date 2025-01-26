@@ -33,7 +33,7 @@ public class Bubble : MonoBehaviour
         { 
             if(!playedSound)
             {
-                // TODO: Play appear sound
+                AudioManager.Instance.PlaySound("bubbles_rise");
                 playedSound = true;
             }
         }
@@ -59,7 +59,7 @@ public class Bubble : MonoBehaviour
     {
         if (collision.transform.tag == "Player")
         {
-            // TODO: Play more oxygen audio
+            AudioManager.Instance.PlaySound("bubbles_catch");
             Player player = collision.transform.GetComponent<Player>();
             player.oxygen += oxygen;
             player.oxygen = Mathf.Min(player.oxygen, 100.0f);

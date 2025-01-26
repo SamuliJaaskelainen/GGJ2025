@@ -95,7 +95,7 @@ public class Player : MonoBehaviour
             { 
                 music.time = t;
             }
-            Debug.Log("Change to music track " + index);
+            //Debug.Log("Change to music track " + index);
         }
     }
 
@@ -167,7 +167,7 @@ public class Player : MonoBehaviour
             oxygen -= dashOxygenConsumption;
             dashTimer = Time.time + dashTime;
             anim.SetTrigger("Dash");
-            // TODO: Play dash audio
+            AudioManager.Instance.PlaySound("dash");
         }
         isDashing = dashTimer > Time.time;
 
@@ -224,7 +224,7 @@ public class Player : MonoBehaviour
 
             isDead =  true;
             anim.SetBool("IsDead", true);
-            // TODO: Play death audio
+            AudioManager.Instance.PlaySound("death");
         }
 
         if (moveInput.y > 0.3f)
@@ -310,7 +310,7 @@ public class Player : MonoBehaviour
             Debug.DrawLine(collision.GetContact(0).point, collision.GetContact(0).point + hurtDir, Color.white, 10.0f);
             anim.SetTrigger("Hurt");
             Screenshake.intensity = 1.0f;
-            // TODO: Play hurt audio
+            AudioManager.Instance.PlaySound("hurt");
         }
         else
         {
