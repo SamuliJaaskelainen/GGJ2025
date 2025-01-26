@@ -39,6 +39,7 @@ public class Player : MonoBehaviour
     public float warningHeadlightSpeed;
     public Transform bgDiv;
     public float bgDivDistance = 0.72f;
+    public float postProcessMaxDepth = 1000;
     public Volume postProcessVolume;
     public Gradient vignetteGradient;
     public AudioSource music;
@@ -132,7 +133,7 @@ public class Player : MonoBehaviour
         chromaticAberration.intensity.value = Mathf.Lerp(1.0f, 0.1f, oxyValue);
         //screenSpaceLensFlare.intensity.value = Mathf.Lerp(100.0f, 0.0f, oxyValue);
 
-        float depthValue = Mathf.Abs(transform.position.y) / 100.0f;
+        float depthValue = Mathf.Abs(transform.position.y) / postProcessMaxDepth;
         colorAdjustments.postExposure.value = Mathf.Lerp(1.0f, -0.66f, depthValue);
         colorAdjustments.contrast.value = Mathf.Lerp(0.0f, 100.0f, depthValue);
         colorAdjustments.saturation.value = Mathf.Lerp(0.0f, -90.0f, depthValue);
