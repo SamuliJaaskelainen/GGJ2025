@@ -14,6 +14,7 @@ public class Bubble : MonoBehaviour
     float hitDelay = 1.0f;
     Vector3 dir;
     float random;
+    bool playedSound = false;
 
     void Start()
     {
@@ -23,7 +24,18 @@ public class Bubble : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.isKinematic = !meshRenderer.isVisible;
+        bool visible = meshRenderer.isVisible;
+
+        rb.isKinematic = !visible;
+
+        if(visible)
+        { 
+            if(!playedSound)
+            {
+                // TODO: Play appear sound
+                playedSound = true;
+            }
+        }
 
         if (Time.time > hitTimer)
         {
@@ -46,6 +58,7 @@ public class Bubble : MonoBehaviour
     {
         if (collision.transform.tag == "Player")
         {
+            // TODO: Play more oxygen audio
             Player player = collision.transform.GetComponent<Player>();
             player.oxygen = 100.0f;
             player.anim.SetTrigger("Bubble");

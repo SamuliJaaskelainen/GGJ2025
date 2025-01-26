@@ -132,6 +132,7 @@ public class Player : MonoBehaviour
             oxygen -= dashOxygenConsumption;
             dashTimer = Time.time + dashTime;
             anim.SetTrigger("Dash");
+            // TODO: Play dash audio
         }
         isDashing = dashTimer > Time.time;
 
@@ -180,26 +181,32 @@ public class Player : MonoBehaviour
 
             isDead =  true;
             anim.SetBool("IsDead", true);
+            // TODO: Play death audio
         }
 
         if (moveInput.y > 0.3f)
         {
+            // TODO: Resume swim audio
             anim.SetFloat("Swim", -moveAction.ReadValue<Vector2>().magnitude);
         }
         else if (moveInput.y < -0.3f)
         {
+            // TODO: Resume swim audio
             anim.SetFloat("Swim", moveAction.ReadValue<Vector2>().magnitude);
         }
         else if (moveInput.x > 0.3f)
         {
+            // TODO: Resume swim audio
             anim.SetFloat("Swim", moveAction.ReadValue<Vector2>().magnitude);
         }
         else if (moveInput.x < -0.3f)
         {
+            // TODO: Resume swim audio
             anim.SetFloat("Swim", moveAction.ReadValue<Vector2>().magnitude);
         }
         else
         {
+            // TODO: Stop swim audio
             anim.SetFloat("Swim", 0.0f);
         }
 
@@ -259,6 +266,7 @@ public class Player : MonoBehaviour
             hurtDir = (collision.GetContact(0).point - collision.transform.position).normalized;
             Debug.DrawLine(collision.GetContact(0).point, collision.GetContact(0).point + hurtDir, Color.white, 10.0f);
             anim.SetTrigger("Hurt");
+            // TODO: Play hurt audio
         }
     }
 }
