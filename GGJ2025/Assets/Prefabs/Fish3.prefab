@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 6499165212800674405}
   m_Layer: 0
   m_Name: Fish3
-  m_TagString: Untagged
+  m_TagString: Hurt
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -107,6 +107,7 @@ MonoBehaviour:
   path: {fileID: 0}
   speed: 1
   wave: 1
+  audioClip: {fileID: 0}
 --- !u!136 &6499165212800674405
 CapsuleCollider:
   m_ObjectHideFlags: 0

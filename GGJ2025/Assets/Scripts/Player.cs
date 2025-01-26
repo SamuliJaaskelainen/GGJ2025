@@ -88,7 +88,7 @@ public class Player : MonoBehaviour
     {
         if(music.clip != tracks[index])
         { 
-            float t = music.time;
+            float t = music.clip ? music.time : 0.0f;
             music.clip = tracks[index];
             music.Play();
             if(keepTime)

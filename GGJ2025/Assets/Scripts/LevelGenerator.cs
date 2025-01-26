@@ -12,6 +12,7 @@ public class LevelPiece
 public class Biome
 {
     public LevelPiece[] pieces;
+    public int biomeLenght = 9999;
 }
 
 public class LevelGenerator : MonoBehaviour
@@ -26,7 +27,7 @@ public class LevelGenerator : MonoBehaviour
     List<GameObject> spawnedPieces = new List<GameObject>();
     List<GameObject> extraPieces = new List<GameObject>();
     bool spawnMorePieces = false;
-
+    int biomeProgress;
 
     void Start()
     {
@@ -77,6 +78,17 @@ public class LevelGenerator : MonoBehaviour
         LevelPiece nextPiece = biomes[currentBiome].pieces[Random.Range(0, biomes[currentBiome].pieces.Length)];
         spawnedPieces.Add(Instantiate(nextPiece.prefab, new Vector3(0.0f, nextPieceSpawnY, 0.0f), Quaternion.identity));
         nextPieceSpawnY -= nextPiece.height;
+        biomeProgress++;
+
+        if(biomeProgress >= biomes[currentBiome].biomeLenght)
+        {
+            biomeProgress = 0;
+            if(currentBiome < biomes.Count -1)
+            {
+                currentBiome++;
+            }
+            Debug.Log("Next biome " + currentBiome);
+        }
     }
 
     void SpawnNextSection()
