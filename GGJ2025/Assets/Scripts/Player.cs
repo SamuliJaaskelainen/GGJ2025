@@ -124,7 +124,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        bgDiv.localPosition = new Vector3(0.0f, 0.0f, bgDivDistance);
+        bgDiv.position = new Vector3(0.0f, transform.position.y, bgDivDistance);
         bgDiv.eulerAngles = new Vector3(270.0f, 0.0f, 0.0f);
 
         float oxyValue = oxygen / 100.0f;
