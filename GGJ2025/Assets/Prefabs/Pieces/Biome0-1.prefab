@@ -5149,23 +5149,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2435315021220626914, guid: 8a86957e64e8d7a43a7dce90abdebace, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.82
+      value: 4.08
       objectReference: {fileID: 0}
     - target: {fileID: 2435315021220626914, guid: 8a86957e64e8d7a43a7dce90abdebace, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.43
+      value: 1.84
       objectReference: {fileID: 0}
     - target: {fileID: 2435315021220626914, guid: 8a86957e64e8d7a43a7dce90abdebace, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.113
+      value: 0.61
       objectReference: {fileID: 0}
     - target: {fileID: 2435315021220626914, guid: 8a86957e64e8d7a43a7dce90abdebace, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: -0.99368644
       objectReference: {fileID: 0}
     - target: {fileID: 2435315021220626914, guid: 8a86957e64e8d7a43a7dce90abdebace, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2435315021220626914, guid: 8a86957e64e8d7a43a7dce90abdebace, type: 3}
       propertyPath: m_LocalRotation.y
@@ -5173,7 +5173,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2435315021220626914, guid: 8a86957e64e8d7a43a7dce90abdebace, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: -0.1121931
       objectReference: {fileID: 0}
     - target: {fileID: 2435315021220626914, guid: 8a86957e64e8d7a43a7dce90abdebace, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -5185,7 +5185,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2435315021220626914, guid: 8a86957e64e8d7a43a7dce90abdebace, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: -347.116
       objectReference: {fileID: 0}
     - target: {fileID: 3062494714205248344, guid: 8a86957e64e8d7a43a7dce90abdebace, type: 3}
       propertyPath: m_Name
