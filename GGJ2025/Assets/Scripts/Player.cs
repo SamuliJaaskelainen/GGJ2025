@@ -266,7 +266,12 @@ public class Player : MonoBehaviour
             hurtDir = (collision.GetContact(0).point - collision.transform.position).normalized;
             Debug.DrawLine(collision.GetContact(0).point, collision.GetContact(0).point + hurtDir, Color.white, 10.0f);
             anim.SetTrigger("Hurt");
+            Screenshake.intensity = 1.0f;
             // TODO: Play hurt audio
+        }
+        else
+        {
+            Screenshake.intensity = 0.1f;
         }
     }
 }
