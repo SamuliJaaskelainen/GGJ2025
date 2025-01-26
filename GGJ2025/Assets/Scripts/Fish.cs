@@ -15,6 +15,13 @@ public class Fish : MonoBehaviour
 
     void Start()
     {
+        if(path == null)
+        {
+            Debug.LogError("No path!", gameObject);
+            enabled = false;
+            return;
+        }
+
         for(int i = 0; i < path.childCount; ++i)
         {
             pathNodes.Add(path.GetChild(i).transform.position);
